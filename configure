@@ -3,7 +3,7 @@
 
 define('CONFIGURE_PATH', dirname(__FILE__));
 
-eval(file_get_contents(CONFIGURE_PATH . '/../packaging_config.php'));
+$config_file = CONFIGURE_PATH . '/../packaging_config.php';
 
 $flags = array(
     'depends' => '-d',
@@ -14,7 +14,30 @@ $flags = array(
     'exclude' => '-x',
 );
 
-$makefile = file_get_contents(CONFIGURE_PATH . '/Makefile.in');
+if(!file_exists($config_file)) {
+    die("Error: the file packaging_config.php file doesn't exist, you should copy the packaging/packaging_config.php.sample and customize it first.\n");
+}
+
+$config = file_get_contents($config_file);
+
+if($config === false) {
+    die("Error: unable to read the contents of packaging_config.php.\n");
+}
+
+// Execute the configuration
+eval($config);
+
+$makefile_path = CONFIGURE_PATH . '/Makefile.in';
+
+if(!file_exists($makefile_path)) {
+    die("Error: the file packaging/Makefile.in doesn't exist.\n");
+}
+
+$makefile = file_get_contents($makefile_path);
+
+if($makefile === false) {
+    die("Error: unable to read the contents of packaging/Makefile.in.\n");
+}
 
 print 'Generating makefile... ';
 foreach($configure as $option => $value) {
@@ -34,7 +57,12 @@ foreach($configure as $option => $value) {
     }
 }
 
-$fp = fopen('Makefile', 'w');
+$fp = fopen(CONFIGURE_PATH . '/../Makefile', 'w');
+
+if($fp === false) {
+    die("Error: unable to open the file Makefile for writing.\n");
+}
+
 fputs($fp, $makefile);
 
 print "done\n";
