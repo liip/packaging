@@ -1,0 +1,48 @@
+#!/usr/bin/php
+<?php
+
+define('CONFIGURE_PATH', dirname(__FILE__));
+
+eval(file_get_contents(CONFIGURE_PATH . '/../packaging_config.php'));
+
+$flags = array(
+    'depends' => '-d',
+    'postinst' => '--post-install',
+    'preinst' => '--pre-install',
+    'postrm' => '--post-uninstall',
+    'prerm' => '--pre-uninstall',
+    'exclude' => '-x',
+);
+
+$makefile = file_get_contents(CONFIGURE_PATH . '/Makefile.in');
+
+print 'Generating makefile... ';
+foreach($configure as $option => $value) {
+    if(is_array($value)) {
+        if(!array_key_exists($option, $flags)) {
+            continue;
+        }
+
+        $concatenated_val = '';
+        foreach($value as $flag) {
+            $concatenated_val .= $flags[$option] . ' ' . $flag . ' ';
+        }
+        $makefile = replace($makefile, $option, $concatenated_val);
+    }
+    else {
+        $makefile = replace($makefile, $option, $value);
+    }
+}
+
+$fp = fopen('Makefile', 'w');
+fputs($fp, $makefile);
+
+print "done\n";
+print "You can now use `make package` to create your package.\n";
+
+function replace($makefile_in, $option, $value) {
+    $option = sprintf('@%s@', strtoupper($option));
+    $value = trim($value);
+
+    return str_replace($option, $value, $makefile_in);
+}

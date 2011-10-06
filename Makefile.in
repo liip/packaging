@@ -1,0 +1,27 @@
+NAME=@PACKAGENAME@
+VERSION=@VERSION@
+MAINTAINER=@MAINTAINER@
+PACKAGENAME=@PACKAGENAME@
+URL=@URL@
+DEPENDS=@DEPENDS@
+EXCLUDE=@EXCLUDE@
+MAINTAINER=@MAINTAINER@
+DESCRIPTION=@DESCRIPTION@
+POSTINST=@POSTINST@
+PREINST=@PREINST@
+POSTRM=@POSTRM@
+PRERM=@PRERM@
+
+clean:
+	rm -rf tmp
+
+structure:
+	mkdir tmp
+	cp -r packaging/* tmp
+
+package: clean structure
+	fpm -s dir -t deb -n "$(PACKAGENAME)" -v "$(VERSION)" -m "$(MAINTAINER)" --url "$(URL)" \
+		$(DEPENDS) $(EXCLUDE) $(POSTINST) $(PREINST) $(POSTRM) $(PRERM) \
+		-x packaging -x packaging_config.php -x ".git*" -x Makefile -a i386 .
+	rm -rf tmp
+

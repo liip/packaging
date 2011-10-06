@@ -1,0 +1,26 @@
+$configure = array(
+    'packagename' => 'mypackage',
+    'version' => '1.0',
+    'maintainer' => 'me myself <me@myself.com>',
+    'description' => '',
+    'url' => '',
+    'packagetype' => 'deb',
+    'depends' => array(
+        'apache2',
+        'libapache2-mod-php',
+    ),
+
+    'exclude' => array(
+    ),
+    'postinst' => array(
+    ),
+    'preinst' => array(
+    ),
+    'postrm' => array(
+    ),
+    'prerm' => array(
+    ),
+
+    'install' => array(
+    ),
+);
