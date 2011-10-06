@@ -11,17 +11,17 @@ POSTINST=@POSTINST@
 PREINST=@PREINST@
 POSTRM=@POSTRM@
 PRERM=@PRERM@
+TMP=tmp/$(PACKAGENAME)
 
 clean:
 	rm -rf tmp
 
-structure:
-	mkdir tmp
-	cp -r packaging/* tmp
+structure: clean
+	mkdir -p $(TMP)/src $(TMP)/build $(TMP)/misc
+	cp -r * $(TMP)/src
 
-package: clean structure
+package: structure
 	fpm -s dir -t deb -n "$(PACKAGENAME)" -v "$(VERSION)" -m "$(MAINTAINER)" --url "$(URL)" \
 		$(DEPENDS) $(EXCLUDE) $(POSTINST) $(PREINST) $(POSTRM) $(PRERM) \
-		-x packaging -x packaging_config.php -x ".git*" -x Makefile -a i386 .
-	rm -rf tmp
+		-x packaging -x packaging_config.php -x ".git*" -x Makefile -a i386 $(TMP)/build
 
