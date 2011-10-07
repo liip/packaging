@@ -14,19 +14,21 @@ POSTINST=@POSTINST@
 PREINST=@PREINST@
 POSTRM=@POSTRM@
 PRERM=@PRERM@
-EXTRA_EXCLUDE=-x packaging -x packaging_config.php -x ".git*" -x Makefile
-TMP=tmp
+TMP=@TMPDIR@
 PTMP=$(TMP)/$(PACKAGENAME)
 
 clean:
-	rm -rf $(TMP)
+	rm -rf $(PTMP)
 
 structure: clean
 	mkdir -p $(PTMP)/src $(PTMP)/build $(PTMP)/misc
-	rsync -r * --exclude $(TMP) $(PTMP)/src
+	rsync -r --exclude packaging --exclude Makefile \
+		--exclude packaging_config.php --exclude '.git*' --exclude '.svn' \
+		--exclude '.CVS' $(EXCLUDE) . $(PTMP)/src
+	@INSTALLCMD@
 
 package: structure
 	fpm -s dir -t deb -n "$(PACKAGENAME)" -v "$(VERSION)" -m "$(MAINTAINER)" --url "$(URL)" \
-		$(DEPENDS) $(EXCLUDE) $(POSTINST) $(PREINST) $(POSTRM) $(PRERM) \
-		$(EXTRA_EXCLUDE) -a i386 $(PTMP)/build
+		$(DEPENDS) $(POSTINST) $(PREINST) $(POSTRM) $(PRERM) \
+		-a all $(PTMP)/build
 

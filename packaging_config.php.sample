@@ -10,6 +10,7 @@ $configure = array(
         'libapache2-mod-php',
     ),
 
+    'tmpdir' => '/tmp',
     'exclude' => array(
     ),
     'postinst' => array(
@@ -23,4 +24,13 @@ $configure = array(
 
     'install' => array(
     ),
+);
+
+/* here you can define which files or directories should go where in the target system
+ * example:
+ * $filemapping = array(
+ *   'app' = 'var/www/mypackage/'
+ * )
+ */
+$filemapping = array(
 );
