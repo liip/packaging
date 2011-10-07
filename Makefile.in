@@ -30,5 +30,5 @@ structure: clean
 package: structure
 	fpm -s dir -t deb -n "$(PACKAGENAME)" -v "$(VERSION)" -m "$(MAINTAINER)" --url "$(URL)" \
 		$(DEPENDS) $(POSTINST) $(PREINST) $(POSTRM) $(PRERM) \
-		-a all $(PTMP)/build
+		-a all -C $(PTMP)/build
 
