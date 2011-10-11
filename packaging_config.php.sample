@@ -7,7 +7,7 @@ $configure = array(
     'packagetype' => 'deb',
     'depends' => array(
         'apache2',
-        'libapache2-mod-php',
+        'libapache2-mod-php5',
     ),
 
     'tmpdir' => '/tmp',
