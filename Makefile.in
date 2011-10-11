@@ -5,7 +5,9 @@ NAME=@PACKAGENAME@
 VERSION=@VERSION@
 MAINTAINER=@MAINTAINER@
 PACKAGENAME=@PACKAGENAME@
+PACKAGETYPE=@PACKAGETYPE@
 URL=@URL@
+ARCH=all
 DEPENDS=@DEPENDS@
 EXCLUDE=@EXCLUDE@
 MAINTAINER=@MAINTAINER@
@@ -17,6 +19,8 @@ PRERM=@PRERM@
 TMP=@TMPDIR@
 PTMP=$(TMP)/$(PACKAGENAME)
 
+all: package
+
 clean:
 	rm -rf $(PTMP)
 
@@ -24,11 +28,11 @@ structure: clean
 	mkdir -p $(PTMP)/src $(PTMP)/build $(PTMP)/misc
 	rsync -r --exclude packaging --exclude Makefile \
 		--exclude packaging_config.php --exclude '.git*' --exclude '.svn' \
-		--exclude '.CVS' $(EXCLUDE) . $(PTMP)/src
+		--exclude '.CVS' --exclude "$(TMP)" $(EXCLUDE) . $(PTMP)/src
 	@INSTALLCMD@
 
 package: structure
-	fpm -s dir -t deb -n "$(PACKAGENAME)" -v "$(VERSION)" -m "$(MAINTAINER)" --url "$(URL)" \
+	fpm -s dir -t $(PACKAGETYPE) -n "$(PACKAGENAME)" -v "$(VERSION)" -m "$(MAINTAINER)" --url "$(URL)" \
 		$(DEPENDS) $(POSTINST) $(PREINST) $(POSTRM) $(PRERM) \
-		-a all -C $(PTMP)/build
+		-a $(ARCH) -C $(PTMP)/build -p $(PTMP)/$(PACKAGENAME)_$(VERSION).$(PACKAGETYPE)
 

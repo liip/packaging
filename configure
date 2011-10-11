@@ -41,15 +41,20 @@ if($makefile === false) {
 
 print 'Generating makefile... ';
 foreach($configure as $option => $value) {
-    if(is_array($value)) {
-        if(!array_key_exists($option, $flags)) {
-            continue;
+    if(array_key_exists($option, $flags)) {
+        $concatenated_val = '';
+
+        if(is_array($value)) {
+            foreach($value as $flag) {
+                $concatenated_val .= $flags[$option] . ' ' . $flag . ' ';
+            }
+        }
+        else {
+            if($value) {
+                $concatenated_val = $flags[$option] . ' ' . $value;
+            }
         }
 
-        $concatenated_val = '';
-        foreach($value as $flag) {
-            $concatenated_val .= $flags[$option] . ' ' . $flag . ' ';
-        }
         $makefile = replace($makefile, $option, $concatenated_val);
     }
     else {
@@ -85,7 +90,7 @@ if($fp === false) {
 fputs($fp, $makefile);
 
 print "done\n";
-print "You can now use `make package` to create your package.\n";
+print "You can now use `make` to create your package.\n";
 
 function replace($makefile_in, $option, $value) {
     $option = sprintf('@%s@', strtoupper($option));
