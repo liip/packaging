@@ -87,6 +87,12 @@ function template($str, $options, $flags = array()) {
             }
             else {
                 if($value) {
+                    // Hack to make fpm take post- and pre- scripts from the
+                    // src/ dir which contains templated files
+                    if(in_array($option, array('postinst', 'preinst', 'prerm', 'postrm')) && substr($value, 0, 1) != '/') {
+                        $value = '$(PTMP)/src/' . $value;
+                    }
+
                     $concatenated_val = $flags[$option] . ' ' . $value;
                 }
             }
