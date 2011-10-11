@@ -8,7 +8,7 @@ How to use it
 2. git clone gitosis@git.liip.ch:public/packaging
 3. cp packaging/packaging_config.php.sample packaging_config.php
 4. edit the configuration file to suit your needs (see the section
-   :ref:`configuration_options` below for more information)
+   `Configuration options`_ below for more information)
 5. ./packaging/configure
 6. make
 
@@ -118,7 +118,7 @@ filemapping
     and their location on the server (ie. where they'll get installed). Each
     entry of this array is represented by the destination of the file (the key)
     and the file in your project (the value). The destination (the array keys)
-    should always be in **relative** notation (ie. they must never beging with a
+    should always be in **relative** notation (ie. they must never begin with a
     slash).
 
     The behaviour is different whether the value is an array or a single value.
@@ -128,11 +128,13 @@ filemapping
 
     Note that you can use variables defined in your `$configure` array.
 
-    Example: 'var/www/@PACKAGENAME@' => array(
-        'app/',
-        'admin/',
-    ),
-    'etc/cron.d/@PACKAGENAME' => 'templates/cron.template'
+    Example::
+
+        'var/www/@PACKAGENAME@' => array(
+            'app/',
+            'admin/',
+        ),
+        'etc/cron.d/@PACKAGENAME' => 'templates/cron.template'
 
 
 ================
