@@ -11,6 +11,7 @@ $configure = array(
     ),
 
     'tmpdir' => '/tmp',
+    'templatedir' => 'templates',
     'postinst' => '',
     'preinst' => '',
     'postrm' => '',
@@ -22,11 +23,19 @@ $configure = array(
 
 /* here you can define which files or directories should go where in the target system.
  * You can use placeholders defined in your $configure array
- * example:
+ * The syntax is dest => src so you don't have to repeat dest if you have lots
+ * of stuff to put in the same directory
+ *
+ * Example:
+ *
  * $filemapping = array(
- *   'app' => 'var/www/@PACKAGENAME@/'
+ *   'var/www/@PACKAGENAME@' => array(
+ *      'app/',
+ *   )
  * )
  */
 $filemapping = array(
-    '*' => 'var/www/@PACKAGENAME@',
+    'var/www/@PACKAGENAME@' => array(
+        '*',
+    ),
 );

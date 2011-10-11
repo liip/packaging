@@ -16,6 +16,7 @@ POSTINST=@POSTINST@
 PREINST=@PREINST@
 POSTRM=@POSTRM@
 PRERM=@PRERM@
+TEMPLATEDIR=@TEMPLATEDIR@
 TMP=@TMPDIR@
 PTMP=$(TMP)/$(PACKAGENAME)
 
@@ -29,9 +30,14 @@ structure: clean
 	rsync -r --exclude packaging --exclude Makefile \
 		--exclude packaging_config.php --exclude '.git*' --exclude '.svn' \
 		--exclude '.CVS' --exclude "$(TMP)" $(EXCLUDE) . $(PTMP)/src
+
+template: structure
+	./packaging/template $(PTMP)/src/$(TEMPLATEDIR)
+
+build: template
 	@INSTALLCMD@
 
-package: structure
+package: build
 	fpm -s dir -t $(PACKAGETYPE) -n "$(PACKAGENAME)" -v "$(VERSION)" -m "$(MAINTAINER)" --url "$(URL)" \
 		$(DEPENDS) $(POSTINST) $(PREINST) $(POSTRM) $(PRERM) \
 		-a $(ARCH) -C $(PTMP)/build -p $(PTMP)/$(PACKAGENAME)_$(VERSION).$(PACKAGETYPE)

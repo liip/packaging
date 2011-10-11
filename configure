@@ -3,7 +3,7 @@
 
 define('CONFIGURE_PATH', dirname(__FILE__));
 
-$config_file = CONFIGURE_PATH . '/../packaging_config.php';
+require_once(CONFIGURE_PATH . '/common.php');
 
 $flags = array(
     'depends' => '-d',
@@ -14,73 +14,16 @@ $flags = array(
     'exclude' => '--exclude', // rsync option
 );
 
-if(!file_exists($config_file)) {
-    die("Error: the file packaging_config.php file doesn't exist, you should copy the packaging/packaging_config.php.sample and customize it first.\n");
-}
-
-$config = file_get_contents($config_file);
-
-if($config === false) {
-    die("Error: unable to read the contents of packaging_config.php.\n");
-}
-
-// Execute the configuration
-eval($config);
-
-$makefile_path = CONFIGURE_PATH . '/Makefile.in';
-
-if(!file_exists($makefile_path)) {
-    die("Error: the file packaging/Makefile.in doesn't exist.\n");
-}
-
-$makefile = file_get_contents($makefile_path);
-
-if($makefile === false) {
-    die("Error: unable to read the contents of packaging/Makefile.in.\n");
-}
+$configure = get_config('configure');
+$filemapping = get_config('filemapping');
 
 print 'Generating makefile... ';
 
-/***
- * handle file mappings
- */
-$dirs = array();
-$cmd = '';
-foreach ($filemapping as $src => $dest) {
-    if(strrpos($dest, '/') == (strlen($dest) - 1)) {
-        $dirs[$dest] = $dest;
-    }
-    $cmd .= "\tcp -a \$(PTMP)/src/$src \$(PTMP)/build/$dest\n";
-}
-$dircmd = '';
-foreach($dirs as $dir) {
-    $dircmd .= "\tmkdir -p \$(PTMP)/build/$dir\n";
-}
-$cmd = $dircmd . $cmd;
+$makefile = get_makefile_in();
+$install_cmd = get_install_cmd();
 
-$makefile = replace($makefile, 'INSTALLCMD', $cmd);
-
-foreach($configure as $option => $value) {
-    if(array_key_exists($option, $flags)) {
-        $concatenated_val = '';
-
-        if(is_array($value)) {
-            foreach($value as $flag) {
-                $concatenated_val .= $flags[$option] . ' ' . $flag . ' ';
-            }
-        }
-        else {
-            if($value) {
-                $concatenated_val = $flags[$option] . ' ' . $value;
-            }
-        }
-
-        $makefile = replace($makefile, $option, $concatenated_val);
-    }
-    else {
-        $makefile = replace($makefile, $option, $value);
-    }
-}
+$makefile = replace($makefile, 'INSTALLCMD', $install_cmd);
+$makefile = template($makefile, $configure, $flags);
 
 $fp = fopen(CONFIGURE_PATH . '/../Makefile', 'w');
 
@@ -92,10 +35,3 @@ fputs($fp, $makefile);
 
 print "done\n";
 print "You can now use `make` to create your package.\n";
-
-function replace($makefile_in, $option, $value) {
-    $option = sprintf('@%s@', strtoupper($option));
-    $value = trim($value);
-
-    return str_replace($option, $value, $makefile_in);
-}
