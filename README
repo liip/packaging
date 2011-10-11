@@ -1,7 +1,0 @@
-Packaging for php (and other) projects.
-
-TODO
-----
-- possible exclude patterns need to be documented (rsync)
-- postinst, preinst scripts need to be handled
-- maybe define a default mapping like '*' => '/var/www/<packagename>'
