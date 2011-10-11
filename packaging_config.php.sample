@@ -11,26 +11,22 @@ $configure = array(
     ),
 
     'tmpdir' => '/tmp',
-    'exclude' => array(
-    ),
-    'postinst' => array(
-    ),
-    'preinst' => array(
-    ),
-    'postrm' => array(
-    ),
-    'prerm' => array(
-    ),
+    'postinst' => '',
+    'preinst' => '',
+    'postrm' => '',
+    'prerm' => '',
 
-    'install' => array(
+    'exclude' => array(
     ),
 );
 
-/* here you can define which files or directories should go where in the target system
+/* here you can define which files or directories should go where in the target system.
+ * You can use placeholders defined in your $configure array
  * example:
  * $filemapping = array(
- *   'app' = 'var/www/mypackage/'
+ *   'app' => 'var/www/@PACKAGENAME@/'
  * )
  */
 $filemapping = array(
+    '*' => 'var/www/@PACKAGENAME@',
 );

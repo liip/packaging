@@ -40,6 +40,26 @@ if($makefile === false) {
 }
 
 print 'Generating makefile... ';
+
+/***
+ * handle file mappings
+ */
+$dirs = array();
+$cmd = '';
+foreach ($filemapping as $src => $dest) {
+    if(strrpos($dest, '/') == (strlen($dest) - 1)) {
+        $dirs[$dest] = $dest;
+    }
+    $cmd .= "\tcp -a \$(PTMP)/src/$src \$(PTMP)/build/$dest\n";
+}
+$dircmd = '';
+foreach($dirs as $dir) {
+    $dircmd .= "\tmkdir -p \$(PTMP)/build/$dir\n";
+}
+$cmd = $dircmd . $cmd;
+
+$makefile = replace($makefile, 'INSTALLCMD', $cmd);
+
 foreach($configure as $option => $value) {
     if(array_key_exists($option, $flags)) {
         $concatenated_val = '';
@@ -61,25 +81,6 @@ foreach($configure as $option => $value) {
         $makefile = replace($makefile, $option, $value);
     }
 }
-
-/***
- * handle file mappings
- */
-$dirs = array();
-$cmd = '';
-foreach ($filemapping as $src => $dest) {
-    if(strrpos($dest, '/') == (strlen($dest) - 1)) {
-        $dirs[$dest] = $dest;
-    }
-    $cmd .= "\tcp -a \$(PTMP)/src/$src \$(PTMP)/build/$dest\n";
-}
-$dircmd = '';
-foreach($dirs as $dir) {
-    $dircmd .= "\tmkdir -p \$(PTMP)/build/$dir\n";
-}
-$cmd = $dircmd . $cmd;
-
-$makefile = replace($makefile, 'INSTALLCMD', $cmd);
 
 $fp = fopen(CONFIGURE_PATH . '/../Makefile', 'w');
 
