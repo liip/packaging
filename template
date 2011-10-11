@@ -10,7 +10,7 @@ if($argc != 2) {
 $config = get_config('configure');
 
 if(is_dir($argv[1])) {
-    $files_dir = dirname(__FILE__) . '/../' . $argv[1];
+    $files_dir = $argv[1];
     $files = scandir($files_dir);
 
     foreach($files as $file) {

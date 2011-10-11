@@ -1,9 +1,7 @@
 #!/usr/bin/php
 <?php
 
-define('CONFIGURE_PATH', dirname(__FILE__));
-
-require_once(CONFIGURE_PATH . '/common.php');
+require_once(dirname(__FILE__) . '/common.php');
 
 $flags = array(
     'depends' => '-d',
@@ -25,7 +23,7 @@ $install_cmd = get_install_cmd();
 $makefile = replace($makefile, 'INSTALLCMD', $install_cmd);
 $makefile = template($makefile, $configure, $flags);
 
-$fp = fopen(CONFIGURE_PATH . '/../Makefile', 'w');
+$fp = fopen('Makefile', 'w');
 
 if($fp === false) {
     die("Error: unable to open the file Makefile for writing.\n");
