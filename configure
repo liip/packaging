@@ -31,5 +31,22 @@ if($fp === false) {
 
 fputs($fp, $makefile);
 
+function checkForCmd($cmd) {
+    $out = $ret = null;
+    print "  checking for '$cmd': ";
+    exec('which ' . $cmd, $out, $ret);
+    if($ret === 0) {
+        print "ok\n";
+    } else {
+        print "not found!\n  ***\n";
+        print "  please make sure '$cmd' is installed and in your path before you run 'make'!\n  ***\n";
+    }
+}
+
 print "done\n";
+
+print "checking for prerequisites...\n";
+checkForCmd('fpm');
+checkForCmd('rsync');
+
 print "You can now use `make` to create your package.\n";
