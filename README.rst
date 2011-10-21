@@ -35,7 +35,8 @@ Configuration options marked as optional mean they can be left blank but they
 still must appear in the configuration array!
 
 packagename
-    The name of your package.
+    The name of your package. You should use only lowercase letters and
+    dashes for the package name. Avoid non-ASCII characters.
 
     Example: drupal-site-foo
 
@@ -85,25 +86,34 @@ templatedir
     directory)
 
 postinst (optional)
-    The path (absolute or relative to your project directory) to the postinst
-    script. All of the post- and pre- script will be copied in your package so
-    you don't need to put them anywhere else (like in the filemapping or in the
-    exclude).
+    The path to the postinst script in your project directory. The script will
+    be incorporated into the package but it will not end up as a file on the
+    target system. This means you don't need to put it anywhere else (like in
+    the filemapping or in the exclude).
 
     Example: scripts/postinst.sh
 
 preinst (optional)
-    The path (absolute or relative to your project directory) to the preinst script.
+    The path to the preinst script in your project directory. The script will
+    be incorporated into the package but it will not end up as a file on the
+    target system. This means you don't need to put it anywhere else (like in
+    the filemapping or in the exclude).
 
     Example: scripts/preinst.sh
 
 postrm (optional)
-    The path (absolute or relative to your project directory) to the postrm script.
+    The path to the postrm script in your project directory. The script will
+    be incorporated into the package but it will not end up as a file on the
+    target system. This means you don't need to put it anywhere else (like in
+    the filemapping or in the exclude).
 
     Example: scripts/postrm.sh
 
 prerm (optional)
-    The path (absolute or relative to your project directory) to the prerm script.
+    The path to the prerm script in your project directory. The script will
+    be incorporated into the package but it will not end up as a file on the
+    target system. This means you don't need to put it anywhere else (like in
+    the filemapping or in the exclude).
 
     Example: scripts/prerm.sh
 

@@ -19,6 +19,26 @@ PRERM=@PRERM@
 TEMPLATEDIR=@TEMPLATEDIR@
 TMP=@TMPDIR@
 PTMP=$(TMP)/$(PACKAGENAME)
+ifneq ($(POSTINST),)
+POSTINSTCMD = --post-install $(PTMP)/misc/$(POSTINST)
+else
+POSTINSTCMD=
+endif
+ifneq ($(PREINST),)
+PREINSTCMD = --pre-install $(PTMP)/misc/$(PREINST)
+else
+PREINSTCMD=
+endif
+ifneq ($(POSTRM),)
+POSTRMCMD = --post-uninstall $(PTMP)/misc/$(POSTRM)
+else
+POSTRMCMD=
+endif
+ifneq ($(PRERM),)
+PRERMCMD = --pre-uninstall $(PTMP)/misc/$(PRERM)
+else
+PRERMCMD=
+endif
 
 all: package
 
@@ -30,6 +50,25 @@ structure: clean
 	rsync -r --exclude packaging --exclude Makefile \
 		--exclude packaging_config.php --exclude '.git*' --exclude '.svn' \
 		--exclude '.CVS' --exclude "$(TMP)" $(EXCLUDE) . $(PTMP)/src
+ifneq ($(POSTINST),)
+	tar -C $(PTMP)/src/ -cf - $(POSTINST) | (cd $(PTMP)/misc; tar -xf - )
+	rm -r $(PTMP)/src/$(POSTINST)
+endif
+
+ifneq ($(PREINST),)
+	tar -C $(PTMP)/src/ -cf - $(PREINST) | (cd $(PTMP)/misc; tar -xf - )
+	rm -r $(PTMP)/src/$(PREINST)
+endif
+
+ifneq ($(POSTRM),)
+	tar -C $(PTMP)/src/ -cf - $(POSTRM) | (cd $(PTMP)/misc; tar -xf - )
+	rm -r $(PTMP)/src/$(POSTRM)
+endif
+
+ifneq ($(PRERM),)
+	tar -C $(PTMP)/src/ -cf - $(PRERM) | (cd $(PTMP)/misc; tar -xf - )
+	rm -r $(PTMP)/src/$(PRERM)
+endif
 
 template: structure
 	./packaging/template $(PTMP)/src/$(TEMPLATEDIR)
@@ -39,6 +78,6 @@ build: template
 
 package: build
 	fpm -s dir -t $(PACKAGETYPE) -n "$(PACKAGENAME)" -v "$(VERSION)" -m "$(MAINTAINER)" --url "$(URL)" \
-		--description "$(DESCRIPTION)" $(DEPENDS) $(POSTINST) $(PREINST) $(POSTRM) $(PRERM) \
+		--description "$(DESCRIPTION)" $(DEPENDS) $(POSTINSTCMD) $(PREINSTCMD) $(POSTRMCMD) $(PRERMCMD) \
 		-a $(ARCH) -C $(PTMP)/build -p $(PTMP)/$(PACKAGENAME)_$(VERSION).$(PACKAGETYPE)
 
