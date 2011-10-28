@@ -200,3 +200,30 @@ command. The `Makefile` will do in order:
 5. Copy each file to its directory structure as defined by the `filemapping`
    configuration option
 6. Call `fpm` on this final directory
+
+================
+Additional Hints
+================
+
+File permissions
+----------------
+
+If you want to change file permissions on the target system you can do that in
+the postinst script.
+
+If for example you have a dedicated directory where your web application will
+write data this directory needs to be writeable by the webserver:
+
+    Example::
+        #!/bin/sh
+        chown -R www-data:www-data /var/lib/sitedata/@PACKAGENAME@
+
+Database setup
+--------------
+
+Unfortunately it is not possible to setup a database interactively during the
+installation of the package. One workaround is to create a script that guides
+you through the configuration of a database and to put that script into the
+package (it could be put into '/usr/share/doc/@PACKAGENAME@/' for example).
+The person installing the package would then be responsible to run this script
+and adapt the application configuration.
