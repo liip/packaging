@@ -49,3 +49,11 @@ checkForCmd('fpm');
 checkForCmd('rsync');
 
 print "You can now use `make` to create your package.\n";
+print "
+********************************************************************************
+NOTE:
+The package is generated from the files in your working directory. You should
+make really sure that you have a clean and up-to-date working directory before
+building a package. Or even better use a dedicated working directory for
+building packages.
+********************************************************************************";
