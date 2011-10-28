@@ -80,59 +80,47 @@ tmpdir
 
 templatedir
     The directory that holds files that must be templated. This must be relative
-    to your project directory.
+    to your project directory. Usually you then want to exclude this directory
+    from the package (see 'filemapping' below).
 
     Example: templates (that means all your template files are in the templates
     directory)
 
 postinst (optional)
     The path to the postinst script in your project directory. The script will
-    be incorporated into the package but it will not end up as a file on the
-    target system. This means you don't need to put it anywhere else (like in
-    the filemapping or in the exclude).
+    be incorporated into the package. To prevent the script from ending up
+    alongside your source code on target system you shoud exclude it (see
+    'filemapping' below). The best way is to put it in the templatedir and
+    exclude this directory.
 
-    Example: scripts/postinst.sh
+    Example: templates/postinst.sh
 
 preinst (optional)
     The path to the preinst script in your project directory. The script will
-    be incorporated into the package but it will not end up as a file on the
-    target system. This means you don't need to put it anywhere else (like in
-    the filemapping or in the exclude).
+    be incorporated into the package. To prevent the script from ending up
+    alongside your source code on target system you shoud exclude it (see
+    'filemapping' below). The best way is to put it in the templatedir and
+    exclude this directory.
 
-    Example: scripts/preinst.sh
+    Example: templates/preinst.sh
 
 postrm (optional)
     The path to the postrm script in your project directory. The script will
-    be incorporated into the package but it will not end up as a file on the
-    target system. This means you don't need to put it anywhere else (like in
-    the filemapping or in the exclude).
+    be incorporated into the package. To prevent the script from ending up
+    alongside your source code on target system you shoud exclude it (see
+    'filemapping' below). The best way is to put it in the templatedir and
+    exclude this directory.
 
-    Example: scripts/postrm.sh
+    Example: templates/postrm.sh
 
 prerm (optional)
     The path to the prerm script in your project directory. The script will
-    be incorporated into the package but it will not end up as a file on the
-    target system. This means you don't need to put it anywhere else (like in
-    the filemapping or in the exclude).
+    be incorporated into the package. To prevent the script from ending up
+    alongside your source code on target system you shoud exclude it (see
+    'filemapping' below). The best way is to put it in the templatedir and
+    exclude this directory.
 
-    Example: scripts/prerm.sh
-
-exclude (optional)
-    An array of filepaths to exclude from your package, relative to your project
-    directory. These won't even be copied to the src/ directory. Don't put your
-    templates directory here for example. Usually if you don't want something in
-    your package, you'll just make sure it's not in your filemapping parameter,
-    but this setting is nice for just excluding something precise from your
-    package (see the example).
-
-    RCS files (.git, .svn, .cvs) are already ignored in the Makefile so you
-    don't need to put them here.
-
-    You can find more info on the syntax you can use in the paths in the rsync
-    manpage, section `FILTER RULES`.
-
-    Example: app/settings.php, app/logs/ (this is useful if your app/ directory
-    is in your filemapping but you just want to exclude these 2 entries)
+    Example: templates/prerm.sh
 
 filemapping
     The filemapping variable should hold the mapping between your project files
@@ -144,8 +132,9 @@ filemapping
 
     The behaviour is different whether the value is an array or a single value.
     An array means that the destination is a directory and the contents of the
-    array will be copied in this directory. A string means that the destination
-    is a file.
+    array will be copied in this directory. If you just specify an empty array
+    an empty directory is created.  A string means that the destination is a
+    file.
 
     Note that you can use variables defined in your `$configure` array.
 
@@ -156,6 +145,26 @@ filemapping
             'admin/',
         ),
         'etc/cron.d/@PACKAGENAME' => 'templates/cron.template'
+
+    Additionally you can exclude specific files or even directories to prevent
+    them from ending up in the package. To do this you need to prefix them
+    with '- '.
+
+    Example::
+
+        'var/www/@PACKAGENAME@' => array(
+            '*',
+            '- /templates',
+        ),
+
+    This will prevent the top level 'templates' directory in your source tree
+    from ending up in the package.
+
+    RCS files (.git, .svn, .cvs) are already ignored in the Makefile so you
+    don't need to exclude them here.
+
+    You can find more info on the syntax you can use in the paths in the rsync
+    manpage, section `FILTER RULES`.
 
 
 ================

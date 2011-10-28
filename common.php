@@ -62,8 +62,18 @@ function get_install_cmd() {
             $dirs[$dest] = $dest;
         }
 
+        $srclist = '';
+        $excludes = '';
         foreach($files as $src) {
-            $cmd .= "\tcp -a \$(PTMP)/src/$src \$(PTMP)/build/$dest\n";
+            if(strpos($src, '- ') === 0) {
+                $excludes .= ' --exclude ' . substr($src, 2);
+            } else {
+                $srclist .= " \$(PTMP)/src/$src";
+            }
+        }
+        # only add a command if there is something to copy
+        if($srclist !== '') {
+            $cmd .= "\trsync -a$excludes $srclist \$(PTMP)/build/$dest\n";
         }
     }
 

@@ -9,7 +9,6 @@ PACKAGETYPE=@PACKAGETYPE@
 URL=@URL@
 ARCH=all
 DEPENDS=@DEPENDS@
-EXCLUDE=@EXCLUDE@
 MAINTAINER=@MAINTAINER@
 DESCRIPTION=@DESCRIPTION@
 POSTINST=@POSTINST@
@@ -29,7 +28,7 @@ structure: clean
 	mkdir -p $(PTMP)/src $(PTMP)/build $(PTMP)/misc
 	rsync -r --exclude packaging --exclude Makefile \
 		--exclude packaging_config.php --exclude '.git*' --exclude '.svn' \
-		--exclude '.CVS' --exclude "$(TMP)" $(EXCLUDE) . $(PTMP)/src
+		--exclude '.CVS' --exclude "$(TMP)" . $(PTMP)/src
 
 template: structure
 	./packaging/template $(PTMP)/src/$(TEMPLATEDIR)

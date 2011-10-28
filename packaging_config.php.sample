@@ -16,15 +16,14 @@ $configure = array(
     'preinst' => '',
     'postrm' => '',
     'prerm' => '',
-
-    'exclude' => array(
-    ),
 );
 
 /* here you can define which files or directories should go where in the target system.
  * You can use placeholders defined in your $configure array
  * The syntax is dest => src so you don't have to repeat dest if you have lots
  * of stuff to put in the same directory
+ * To prevent some files or directories from ending up in the package you can exclude
+ * them by prepending them with '- ' (see also example).
  *
  * Example:
  *
@@ -37,5 +36,6 @@ $configure = array(
 $filemapping = array(
     'var/www/@PACKAGENAME@' => array(
         '*',
+        '- /templates',
     ),
 );

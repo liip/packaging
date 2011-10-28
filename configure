@@ -9,7 +9,6 @@ $flags = array(
     'preinst' => '--pre-install',
     'postrm' => '--post-uninstall',
     'prerm' => '--pre-uninstall',
-    'exclude' => '--exclude', // rsync option
 );
 
 $configure = get_config('configure');
