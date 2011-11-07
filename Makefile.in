@@ -17,6 +17,7 @@ POSTRM=@POSTRM@
 PRERM=@PRERM@
 TEMPLATEDIR=@TEMPLATEDIR@
 TMP=@TMPDIR@
+ENV=
 PTMP=$(TMP)/$(PACKAGENAME)
 
 all: package
@@ -31,7 +32,7 @@ structure: clean
 		--exclude '.CVS' --exclude "$(TMP)" . $(PTMP)/src
 
 template: structure
-	./packaging/template $(PTMP)/src/$(TEMPLATEDIR)
+	./packaging/template $(PTMP)/src/$(TEMPLATEDIR) $(ENV)
 
 build: template
 	@INSTALLCMD@

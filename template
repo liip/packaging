@@ -3,11 +3,15 @@
 
 require_once(dirname(__FILE__) . '/common.php');
 
-if($argc != 2) {
-    die("Usage: template <dir|file>\n");
+if($argc < 2 || $argc > 3) {
+    die("Usage: template <dir|file> [env]\n");
 }
 
 $config = get_config('configure');
+
+if($argc == 3) {
+    $config['env'] = $argv[2];
+}
 
 if(is_dir($argv[1])) {
     $files_dir = $argv[1];
