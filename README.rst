@@ -14,6 +14,29 @@ How to use it
 
 Now you should have the deb/rpm package in your `tmp/yourpackage` directory.
 
+Hint:
+You can pass an optional argument 'ENV' to the 'make' command:
+make ENV=prod
+
+This way you can distinguish between different installation environments
+(i.e production and staging). You can then use this variable in you
+package_config.php to distinguish between files that should be used in a
+production environment or in a staging environment.
+
+    Example::
+
+    $filemapping = array(
+        'var/www/@PACKAGENAME@' => array(
+            '*',
+            '- /packaging_files',
+        ),
+        'etc/packaged-site/@PACKAGENAME@' => array(
+            // This file is used as a template file that holds environment-dependent
+            // information
+            'packaging_files/config.$(ENV).m4',
+        ),
+    );
+
 =============
 Prerequisites
 =============
