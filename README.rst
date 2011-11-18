@@ -25,23 +25,24 @@ production environment or in a staging environment.
 
     Example::
 
-    $filemapping = array(
-        'var/www/@PACKAGENAME@' => array(
-            '*',
-            '- /packaging_files',
-        ),
-        'etc/packaged-site/@PACKAGENAME@' => array(
-            // This file is used as a template file that holds environment-dependent
-            // information
-            'packaging_files/config.$(ENV).m4',
-        ),
-    );
+        $filemapping = array(
+            'var/www/@PACKAGENAME@' => array(
+                '*',
+                '- /packaging_files',
+            ),
+            'etc/packaged-site/@PACKAGENAME@' => array(
+                // This file is used as a template file that holds environment-dependent
+                // information
+                'packaging_files/config.$(ENV).m4',
+            ),
+        );
 
 =============
 Prerequisites
 =============
 
 The packaging process depends on the following to external programs:
+
 * fpm: see https://github.com/jordansissel/fpm
 * rsync: this is usually installed on most \*nix like systems
 
@@ -238,6 +239,7 @@ If for example you have a dedicated directory where your web application will
 write data this directory needs to be writeable by the webserver:
 
     Example::
+
         #!/bin/sh
         chown -R www-data:www-data /var/lib/sitedata/@PACKAGENAME@
 
