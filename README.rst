@@ -23,19 +23,19 @@ This way you can distinguish between different installation environments
 package_config.php to distinguish between files that should be used in a
 production environment or in a staging environment.
 
-    Example::
+Example::
 
-        $filemapping = array(
-            'var/www/@PACKAGENAME@' => array(
-                '*',
-                '- /packaging_files',
-            ),
-            'etc/packaged-site/@PACKAGENAME@' => array(
-                // This file is used as a template file that holds environment-dependent
-                // information
-                'packaging_files/config.$(ENV).m4',
-            ),
-        );
+    $filemapping = array(
+        'var/www/@PACKAGENAME@' => array(
+            '*',
+            '- /packaging_files',
+        ),
+        'etc/packaged-site/@PACKAGENAME@' => array(
+            // This file is used as a template file that holds environment-dependent
+            // information
+            'packaging_files/config.$(ENV).m4',
+        ),
+    );
 
 =============
 Prerequisites
@@ -238,10 +238,10 @@ the postinst script.
 If for example you have a dedicated directory where your web application will
 write data this directory needs to be writeable by the webserver:
 
-    Example::
+Example::
 
-        #!/bin/sh
-        chown -R www-data:www-data /var/lib/sitedata/@PACKAGENAME@
+    #!/bin/sh
+    chown -R www-data:www-data /var/lib/sitedata/@PACKAGENAME@
 
 Database setup
 --------------
