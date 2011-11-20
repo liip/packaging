@@ -5,7 +5,7 @@ How to use it
 =============
 
 1. cd to your project directory
-2. git clone gitosis@git.liip.ch:public/packaging
+2. git clone git://github.com/liip/packaging.git
 3. cp packaging/packaging_config.php.sample packaging_config.php
 4. edit the configuration file to suit your needs (see the section
    `Configuration options`_ below for more information)
