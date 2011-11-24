@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/env php
 <?php
 
 require_once(dirname(__FILE__) . '/common.php');
@@ -56,4 +56,4 @@ The package is generated from the files in your working directory. You should
 make really sure that you have a clean and up-to-date working directory before
 building a package. Or even better use a dedicated working directory for
 building packages.
-********************************************************************************";
+********************************************************************************\n";
