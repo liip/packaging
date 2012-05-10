@@ -40,5 +40,5 @@ build: template
 package: build
 	fpm -s dir -t $(PACKAGETYPE) -n "$(PACKAGENAME)" -v "$(VERSION)" -m "$(MAINTAINER)" --url "$(URL)" \
 		--description "$(DESCRIPTION)" $(DEPENDS) $(POSTINST) $(PREINST) $(POSTRM) $(PRERM) \
-		-a $(ARCH) -C $(PTMP)/build -p $(PTMP)/$(PACKAGENAME)_$(VERSION).$(PACKAGETYPE)
+		-a $(ARCH) -C $(PTMP)/build -p $(PTMP)/$(PACKAGENAME)_$(VERSION).$(PACKAGETYPE) .
 
