@@ -10,6 +10,9 @@ The packaging process depends on the following to external programs:
 These two programs need to be installed before you can use the packaging
 scripts.
 
+Install FPM via gem with: 
+$sudo gem install fpm
+
 =============
 Build Server / Workstation
 ==========================
