@@ -1,7 +1,6 @@
 =====================
 Configuration options
 =====================
-
 // Demo configuration array
 $configure = array(
     'packagename' => 'mypackage',
@@ -23,8 +22,8 @@ $configure = array(
     'prerm' => '',
 );
 
-Configuration options marked as optional mean they can be left blank but they
-still must appear in the configuration array!
+(Configuration options marked as optional mean they can be left blank but they
+still must appear in the configuration array!)
 
 packagename
     The name of your package. You should use only lowercase letters and
