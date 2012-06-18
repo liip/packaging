@@ -1,5 +1,4 @@
 ##Configuration options
-    <?php
     // Demo configuration array
     $configure = array(
         'packagename' => 'mypackage',
