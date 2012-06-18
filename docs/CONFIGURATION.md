@@ -1,24 +1,25 @@
 ##Configuration options
-// Demo configuration array
-$configure = array(
-    'packagename' => 'mypackage',
-    'version' => '1.0',
-    'maintainer' => 'me myself <me@myself.com>',
-    'description' => '',
-    'url' => '',
-    'packagetype' => 'deb',
-    'depends' => array(
-        'apache2',
-        'libapache2-mod-php5',
-    ),
 
-    'tmpdir' => '/tmp',
-    'templatedir' => 'templates',
-    'postinst' => '',
-    'preinst' => '',
-    'postrm' => '',
-    'prerm' => '',
-);
+    // Demo configuration array
+    $configure = array(
+        'packagename' => 'mypackage',
+        'version' => '1.0',
+        'maintainer' => 'me myself <me@myself.com>',
+        'description' => '',
+        'url' => '',
+        'packagetype' => 'deb',
+        'depends' => array(
+            'apache2',
+            'libapache2-mod-php5',
+        ),
+
+        'tmpdir' => '/tmp',
+        'templatedir' => 'templates',
+        'postinst' => '',
+        'preinst' => '',
+        'postrm' => '',
+        'prerm' => '',
+    );
 
 (Configuration options marked as optional mean they can be left blank but they
 still must appear in the configuration array!)
