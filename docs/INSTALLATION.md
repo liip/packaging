@@ -4,14 +4,9 @@ Prerequisites
 
 The packaging process depends on the following to external programs:
 
-* fpm: see https://github.com/jordansissel/fpm
-* rsync: this is usually installed on most \*nix like systems
-
-These two programs need to be installed before you can use the packaging
-scripts.
-
-Install FPM via gem with: 
-$sudo gem install fpm
+* fpm: A OS indepentent package manager. (Mac: $sudo gem install fpm) See https://github.com/jordansissel/fpm
+* rsync: Remote Transfer/Sync Utility (this is usually installed on most \*nix like systems)
+* rpmtools: Tools for building RPM Packages (only needed for rpm packages, easy to install on Linux with: $apt-get install rpmlibs, hard to install on Mac OS)
 
 =============
 Build Server / Workstation
