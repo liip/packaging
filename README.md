@@ -5,9 +5,9 @@ Additional Documentation
 ========================
 Please refer to the additional documentation for more in-depth infos.
 
-[Installation](/docs/INSTALLATION.rst "Installation")
+[Installation](./docs/INSTALLATION.rst "Installation")
 
-[Configuration](/docs/CONFIGURATION.rst "Configuration")
+[Configuration](./docs/CONFIGURATION.rst "Configuration")
 
 =============
 How to use it
