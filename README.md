@@ -3,11 +3,7 @@ Packaging for PHP, Symfony2, and other projects.
 =============
 Additional Documentation
 ========================
-Please refer to the additional documentation for more in-depth infos.
-
-[Installation](./docs/INSTALLATION.rst "Installation")
-
-[Configuration](./docs/CONFIGURATION.rst "Configuration")
+Please refer to the additional documentation in the ./docs folder for more in-depth infos.
 
 =============
 How to use it
