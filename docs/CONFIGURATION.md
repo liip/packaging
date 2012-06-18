@@ -29,49 +29,49 @@ dashes for the package name. Avoid non-ASCII characters.
 
 Example: 'drupal-site-foo'
 
-==========================
+__________________________
 
 ####version
 The version of your package.
 
 Example: '0.1.0'
 
-==========================
+__________________________
 
 ####maintainer
 Usually your name.
 
 Example: 'Foo Bar <foo@bar.com>'
 
-==========================
+__________________________
 
 ####description
 The description of your package.
 
 Example: 'Foo Drupal site'
 
-==========================
+__________________________
 
 ####url (optional)
 The homepage of you package.
 
 Example: 'http://www.foo.bar'
 
-==========================
+__________________________
 
 ####packagetype
 The type of package you're building. Choose `deb` or `rpm`.
 
 Example: 'deb'
 
-==========================
+__________________________
 
 ####depends (optional)
 An array containing a set of package names your package depends on.
 
 Example: 'apache2, libapache2-mod-php, memcached, php5-memcached'
 
-==========================
+__________________________
 
 ####tmpdir
 The directory that will be used to build the package and to store the
@@ -81,7 +81,7 @@ directory, like `/tmp`.
 Example: 'tmp' (this will put everything in a `tmp` directory inside your
 project directory)
 
-==========================
+__________________________
 
 ####templatedir
 The directory that holds files that must be templated. This must be relative
@@ -91,7 +91,7 @@ from the package (see 'filemapping' below).
 Example: 'templates' (that means all your template files are in the templates
 directory)
 
-==========================
+__________________________
 
 ####postinst (optional)
 The path to the postinst script in your project directory. The script will
@@ -102,7 +102,7 @@ exclude this directory.
 
 Example: 'templates/postinst.sh'
 
-==========================
+__________________________
 
 ####preinst (optional)
 The path to the preinst script in your project directory. The script will
@@ -113,7 +113,7 @@ exclude this directory.
 
 Example: 'templates/preinst.sh'
 
-==========================
+__________________________
 
 ####postrm (optional)
 The path to the postrm script in your project directory. The script will
@@ -124,7 +124,7 @@ exclude this directory.
 
 Example: 'templates/postrm.sh'
 
-==========================
+__________________________
 
 ####prerm (optional)
 The path to the prerm script in your project directory. The script will
@@ -135,7 +135,7 @@ exclude this directory.
 
 Example: 'templates/prerm.sh'
 
-==========================
+__________________________
 
 ####filemapping
 The filemapping variable should hold the mapping between your project files
