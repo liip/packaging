@@ -1,6 +1,4 @@
-=============
-How to use it
-=============
+##How to use it
 
 1. cd to your project directory
 2. git clone git://github.com/liip/packaging.git
@@ -13,13 +11,10 @@ How to use it
 Now you should have the deb/rpm package in your `tmp/yourpackage` directory.
 
 
-================
-Additional Hints
-================
+##Additional Hints
 
 
-Environments
-------------
+###Environments
 You can pass an optional argument 'ENV' to the 'make' command:
 make ENV=prod
 
@@ -43,8 +38,7 @@ Example::
     );
 
 
-File permissions
-----------------
+###File permissions
 If you want to change file permissions on the target system you can do that in
 the postinst script.
 
@@ -57,8 +51,7 @@ Example::
     chown -R www-data:www-data /var/lib/sitedata/@PACKAGENAME@
 
 
-Database setup
---------------
+###Database setup
 Unfortunately it is not possible to setup a database interactively during the
 installation of the package. One workaround is to create a script that guides
 you through the configuration of a database and to put that script into the
@@ -67,12 +60,9 @@ The person installing the package would then be responsible to run this script
 and adapt the application configuration.
 
 
-================
-How does it work
-================
+##How does it work
 
-Files
------
+###Files
 
 * configure: its role is to create the Makefile
 * template: its role is to replace placeholders in a file by actual
@@ -80,9 +70,7 @@ Files
 * Makefile.in: skeleton file of the final Makefile
 * common.php: holds various functions used by the packaging/templating process
 
-Process
--------
-
+###Process
 First, the `configure` script will take the values defined in the
 `packaging_config.php` file and use them to generate the `Makefile`, based on the
 `Makefile.in` file.

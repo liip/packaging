@@ -1,6 +1,4 @@
-=====================
-Configuration options
-=====================
+##Configuration options
 // Demo configuration array
 $configure = array(
     'packagename' => 'mypackage',
