@@ -162,6 +162,10 @@ configfile (optional)
     package manager. Configuration files are handled specially by the
     package manager. They will not be silently overwritten if an new package
     provides an updated version.
+    **Important:** The path you specify here has to be the path to the
+    location where the file will end up on the target system.
+
+    Example: /etc/myapp.conf
 
 filemapping
     The filemapping variable should hold the mapping between your project files
