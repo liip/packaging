@@ -146,6 +146,23 @@ prerm (optional)
 
     Example: templates/prerm.sh
 
+debconfconfig (optional)
+    Only for debian packages: The path (relative to the project root) to a
+    debconf config file.
+
+debconftemplate (optional)
+    Only for debian packages: The path (relative to the project root) to a
+    debconf template file.
+
+    For more information on debconf see
+    http://www.debian.org/doc/packaging-manuals/debconf_specification.html
+
+configfile (optional)
+    Specify a file that is to be treated as a configuration file by the
+    package manager. Configuration files are handled specially by the
+    package manager. They will not be silently overwritten if an new package
+    provides an updated version.
+
 filemapping
     The filemapping variable should hold the mapping between your project files
     and their location on the server (ie. where they'll get installed). Each
