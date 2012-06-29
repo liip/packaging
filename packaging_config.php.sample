@@ -16,6 +16,9 @@ $configure = array(
     'preinst' => '',
     'postrm' => '',
     'prerm' => '',
+    'debconfconfig' => '', // only for debian: config file for debconf
+    'debconftemplate' => '', // only for debian: template file for debconf
+    'configfile' => '', // mark a file as configuration file
 );
 
 /* here you can define which files or directories should go where in the target system.

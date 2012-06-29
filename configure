@@ -9,6 +9,9 @@ $flags = array(
     'preinst' => '--pre-install',
     'postrm' => '--post-uninstall',
     'prerm' => '--pre-uninstall',
+    'debconfconfig' => '--deb-config',
+    'debconftemplate' => '--deb-templates',
+    'configfile' => '--config-files',
 );
 
 $configure = get_config('configure');
@@ -18,6 +21,14 @@ print 'Generating makefile... ';
 
 $makefile = get_makefile_in();
 $install_cmd = get_install_cmd();
+
+// check if some flags are missing from the config and set them to an empty
+// value. Used for backwards compatibility
+foreach($flags as $key=>$value) {
+    if(!isset($configure[$key])) {
+        $configure[$key] = '';
+    }
+}
 
 $makefile = replace($makefile, 'INSTALLCMD', $install_cmd);
 $makefile = template($makefile, $configure, $flags);
