@@ -1,5 +1,6 @@
 $configure = array(
     'packagename' => 'mypackage',
+    'arch' => 'all',
     'version' => '1.0',
     'maintainer' => 'me myself <me@myself.com>',
     'description' => '',
