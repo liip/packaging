@@ -99,7 +99,7 @@ function template($str, $options, $flags = array()) {
                 if($value) {
                     // Hack to make fpm take post- and pre- scripts from the
                     // src/ dir which contains templated files
-                    if(in_array($option, array('postinst', 'preinst', 'prerm', 'postrm')) && substr($value, 0, 1) != '/') {
+                    if(in_array($option, array('postinst', 'preinst', 'prerm', 'postrm', 'debconfconfig', 'debconftemplate')) && substr($value, 0, 1) != '/') {
                         $value = '$(PTMP)/src/' . $value;
                     }
 
