@@ -64,6 +64,12 @@ packagename
 
     Example: drupal-site-foo
 
+arch
+    The architecture name. Usually matches 'uname -m'. For automatic values,
+    you can use 'all'
+
+    Example: x86_64
+
 version
     The version of your package.
 
