@@ -1,0 +1,9 @@
+*  Fri, 14 Sep 2012 23:47:10 +0200
+
+- Merged a PR which adds the possibility to specify the architecture
+  If you already have a packaging_config.php you should update it and add the
+  following line:
+  'arch' => 'all'
+  See the packaging_config.php.sample for details.
+
+
