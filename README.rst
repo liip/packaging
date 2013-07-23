@@ -45,6 +45,7 @@ The packaging process depends on the following to external programs:
 
 * fpm: see https://github.com/jordansissel/fpm
 * rsync: this is usually installed on most \*nix like systems
+* make: this is also usually installed on a lot of \*nix-like systems
 
 These two programs need to be installed before you can use the packaging
 scripts.
