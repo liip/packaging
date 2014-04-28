@@ -30,7 +30,7 @@ clean:
 
 structure: clean
 	mkdir -p $(PTMP)/src $(PTMP)/build $(PTMP)/misc
-	rsync -r --exclude packaging --exclude Makefile \
+	rsync -rl --exclude packaging --exclude Makefile \
 		--exclude packaging_config.php --exclude '.git*' --exclude '.svn' \
 		--exclude '.CVS' --exclude "$(TMP)" . $(PTMP)/src
 
